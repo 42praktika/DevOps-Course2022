@@ -1,0 +1,27 @@
+name: Telegram notification
+
+on: [ pull_request, push ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push notify
+        if: ${{ github.event_name == 'push' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ${{ github.actor }} just pushed ${{ github.ref }} into ${{ github.repository }} with comment "${{ github.event.head_commit.message }}"
+            ${{ github.event.compare }}
+      
+      - name: PR notify
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ${{ github.actor }} just opened PR in ${{ github.repository }} with comment "${{github.event.pull_request.title}}"
+            ${{ github.event.pull_request.html_url }}
