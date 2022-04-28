@@ -1,3 +1,6 @@
 [submodule "go-simple-upload-server"]
 	path = go-simple-upload-server
 	url = https://github.com/mayth/go-simple-upload-server
+[submodule "nginx-le"]
+	path = nginx-le
+	url = ../../nginx-le/nginx-le.git
