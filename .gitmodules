@@ -1,0 +1,3 @@
+[submodule "go-simple-upload-server"]
+	path = go-simple-upload-server
+	url = https://github.com/mayth/go-simple-upload-server
